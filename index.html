@@ -107,21 +107,20 @@
   </div>
 
   <script>
-    const form = document.getElementById('vipForm');
-    const pickupInput = document.getElementById('pickupTime');
+  const form = document.getElementById('vipForm');
+  const pickupInput = document.getElementById('pickupTime');
 
-    form.addEventListener('submit', function(e) {
-      // Convert HH:MM to ISO time format 00:30:00.000Z
-      const timeValue = pickupInput.value; // "HH:MM"
-      if (timeValue) {
-        const [hours, minutes] = timeValue.split(':');
-        // Add seconds and milliseconds
-        pickupInput.value = `${hours}:${minutes}:00.000Z`;
-      }
-    });
-  </script>
+  form.addEventListener('submit', function(e) {
+    const timeValue = pickupInput.value; // "HH:MM"
+    if (timeValue) {
+      const [hours, minutes] = timeValue.split(':');
+      pickupInput.value = `${hours}:${minutes}:00`; // <-- remove .000Z
+    }
+  });
+</script>
 
 </body>
 </html>
+
 
 
