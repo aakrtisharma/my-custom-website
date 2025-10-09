@@ -36,7 +36,8 @@
     }
     input[type="text"],
     input[type="email"],
-    input[type="tel"] {
+    input[type="tel"],
+    input[type="time"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -47,7 +48,8 @@
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
-    input[type="tel"]:focus {
+    input[type="tel"]:focus,
+    input[type="time"]:focus {
       border-color: #007bff;
       outline: none;
     }
@@ -78,7 +80,7 @@
 
   <div class="container">
     <h1>VIP Car Booking</h1>
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DIj000000HJrn" method="POST">
+    <form id="vipForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DIj000000HJrn" method="POST">
 
       <input type="hidden" name="oid" value="00DIj000000HJrn">
       <input type="hidden" name="retURL" value="http://trailsignup-12200011f3f49e.my.site.com/VIPCar/s/">
@@ -97,13 +99,29 @@
       <input id="00NIj000000vcJg" maxlength="255" name="00NIj000000vcJg" type="text" required>
 
       <label for="00NIj000000vcJl">Timings of Pickup</label>
-      <input id="00NIj000000vcJl" name="00NIj000000vcJl" placeholder="HH:MM" type="text" required>
+      <input id="pickupTime" name="00NIj000000vcJl" type="time" required>
 
       <input type="submit" name="submit" value="Book Now">
     </form>
     <div class="footer">© 2025 VIP Car Service</div>
   </div>
 
+  <script>
+    const form = document.getElementById('vipForm');
+    const pickupInput = document.getElementById('pickupTime');
+
+    form.addEventListener('submit', function(e) {
+      // Convert HH:MM to ISO time format 00:30:00.000Z
+      const timeValue = pickupInput.value; // "HH:MM"
+      if (timeValue) {
+        const [hours, minutes] = timeValue.split(':');
+        // Add seconds and milliseconds
+        pickupInput.value = `${hours}:${minutes}:00.000Z`;
+      }
+    });
+  </script>
+
 </body>
 </html>
+
 
